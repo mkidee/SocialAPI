@@ -1,7 +1,7 @@
 const { connect, connection } = require('mongoose');
 
 const connectionString = 
-    process.env.MONGODB_URI || '//insert database here';
+    process.env.MONGODB_URI || 'mongodb://localhost:27017/SOCIALAPI';
 
 connect(connectionString, {
     useNewUrlParser: true,
