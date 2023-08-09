@@ -17,16 +17,20 @@ module.exports = {
     createThought(req, res) {
         Thought.create(req.body)
             .then(({ _id }) => {
+                console.log(_id);
                 return User.findOneAndUpdate(
                     { _id: req.body.userId },
-                    { $push: { thoughts: _Id } },
+                    { $push: { thoughts: _id } },
                     { new: true }
                 );
             })
-            .then((thought) => 
+            .then((thought) => {
                 !thought ? res.status(404).json({message: 'No thought was found using this id.'})
-                    : res.json(thought))
-                .catch(err => res.status(400).json(err));
+                    : res.json(thought)
+            })
+            .catch(err => {
+                res.status(400).json(err) 
+            });
     },
     updateThought(req, res) {
         Thought.findOneAndUpdate(
